@@ -9,8 +9,7 @@
           - name
         filter: {}
     - role: user
-      permission:
-        <<: *user_public_permission
+      permission: *user_public_permission
   object_relationships:
     - name: user_privates
       using:
