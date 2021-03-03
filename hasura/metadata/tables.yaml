@@ -3,17 +3,14 @@
     name: users
   select_permissions:
     - role: anonymous
-      permission:
+      permission: &user_public_permission
         columns:
           - id
           - name
         filter: {}
     - role: user
       permission:
-        columns:
-          - id
-          - name
-        filter: {}
+        <<: *user_public_permission
   object_relationships:
     - name: user_privates
       using:
