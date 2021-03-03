@@ -1,3 +1,38 @@
 - table:
     schema: public
     name: users
+  select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - id
+          - name
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - id
+          - name
+        filter: {}
+  object_relationships:
+    - name: user_privates
+      using:
+        manual_configuration:
+          remote_table:
+            schema: public
+            name: user_privates
+          column_mapping:
+            id: user_id
+
+- table:
+    schema: public
+    name: user_privates
+  select_permissions:
+    - role: user
+      permission:
+        columns:
+          - user_id
+          - email
+        filter:
+          user_id:
+            _eq: X-Hasura-User-Id
